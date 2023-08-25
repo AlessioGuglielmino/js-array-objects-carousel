@@ -1,0 +1,13 @@
+.contenitore {
+  height: 100vh;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carosello {
+  width: 80%;
+  height: 80%;
+  background-color: aqua;
+}
