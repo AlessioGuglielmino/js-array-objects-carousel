@@ -12,13 +12,16 @@
 //  ma dedicargli molto tempo da subito può farvi rimanere indietro.
 
 // Milestone 1:
-// Ora rimuoviamo i contenuti statici e usiamo l'array di oggetti letterali per popolare dinamicamente il carosello.
+// Ora rimuoviamo i contenuti statici
+// e usiamo l'array di oggetti letterali per popolare dinamicamente il carosello.
 // Al click dell'utente sulle frecce verso sinistra o destra,
 //  l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
 
 // Milestone 2:
-// Aggiungere il ciclo infinito del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso destra,
-//  la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sinistra.
+// Aggiungere il ciclo infinito del carosello.
+// Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso destra,
+//  la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura
+//  se l'utente clicca la freccia verso sinistra.
 
 // BONUS 1:
 // Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l'immagine corrispondente.
@@ -54,3 +57,43 @@ const images = [
     text: "Marvel's Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.",
   },
 ];
+
+// RECUEPERO GLI ELEMENIT DI INTERESE
+
+//* Recupero tasto Prev dal DOM
+const prev = document.getElementById("prev");
+
+//* Recupero tasto Next dal DOM
+const next = document.getElementById("next");
+
+//* Recupero il container dal DOM
+const carosel = document.getElementById("carosel");
+
+//* Recupero gli elementi con classe item
+const items = document.getElementsByClassName("item");
+
+// FUNZIONE PER I BOTTONI NEXT E PREV
+index = 0;
+
+next.addEventListener("click", function () {
+  if (index < items.length) {
+    document.querySelector(".item.active").classList.remove("active");
+
+    index++;
+  } else {
+    index = 0;
+  }
+
+  items[index].classList.add("active");
+});
+
+prev.addEventListener("click", function () {
+  document.querySelector(".item.active").classList.remove("active");
+  if (index > 0) {
+    index--;
+  } else {
+    index = 0;
+  }
+
+  items[index].classList.add("active");
+});
