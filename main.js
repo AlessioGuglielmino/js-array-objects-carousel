@@ -70,9 +70,13 @@ const next = document.getElementById("next");
 const carosel = document.getElementById("carosel");
 
 //* Recupero gli elementi con classe item
+const slidesContainer = document.getElementById("slides-container");
+
+//* Recupero gli elementi con classe item
 const items = document.getElementsByClassName("item");
 
 // FUNZIONE PER I BOTTONI NEXT E PREV
+
 index = 0;
 
 next.addEventListener("click", function () {
