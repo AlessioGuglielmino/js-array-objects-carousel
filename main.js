@@ -30,7 +30,7 @@
 // BONUS 3:
 // Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
-const images = [
+const slides = [
   {
     image: "img/01.webp",
     title: "Marvel's Spiderman Miles Morale",
@@ -69,35 +69,20 @@ const next = document.getElementById("next");
 //* Recupero il container dal DOM
 const carosel = document.getElementById("carosel");
 
-//* Recupero gli elementi con classe item
-const slidesContainer = document.getElementById("slides-container");
+//* Recupero gli elementi con classe item - DOVE STAMPO LE SLIDES
+const slidesContainerElement = document.getElementById("slides-container");
 
 //* Recupero gli elementi con classe item
 const items = document.getElementsByClassName("item");
 
-// FUNZIONE PER I BOTTONI NEXT E PREV
-
-index = 0;
-
-next.addEventListener("click", function () {
-  if (index < items.length) {
-    document.querySelector(".item.active").classList.remove("active");
-
-    index++;
-  } else {
-    index = 0;
-  }
-
-  items[index].classList.add("active");
-});
-
-prev.addEventListener("click", function () {
-  document.querySelector(".item.active").classList.remove("active");
-  if (index > 0) {
-    index--;
-  } else {
-    index = 0;
-  }
-
-  items[index].classList.add("active");
+slides.forEach((slide) => {
+  const slideElement = document.createElement("div");
+  slideElement.classList.add("slide");
+  slideElement.innerHTML = ` <img src="./img/01.webp" alt="" />
+  <div class="slide-text">
+    <h1>titolo</h1>
+    <p>Lorem ipsum dolor sit amet.</p>
+  </div>`;
+  slide.HTMLnode = slideElement;
+  slidesContainerElement.append(slideElement);
 });
