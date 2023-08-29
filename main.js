@@ -60,12 +60,6 @@ const slides = [
 
 // RECUEPERO GLI ELEMENIT DI INTERESE
 
-//* Recupero tasto Prev dal DOM
-const prev = document.getElementById("prev");
-
-//* Recupero tasto Next dal DOM
-const next = document.getElementById("next");
-
 //* Recupero il container dal DOM
 const carosel = document.getElementById("carosel");
 
@@ -75,14 +69,71 @@ const slidesContainerElement = document.getElementById("slides-container");
 //* Recupero gli elementi con classe item
 const items = document.getElementsByClassName("item");
 
-slides.forEach((slide) => {
+let activeSlide = 0;
+
+// PER OGNI SLIDE
+slides.forEach((slide, index) => {
+  // CREO UN NODO HTML
+
   const slideElement = document.createElement("div");
   slideElement.classList.add("slide");
-  slideElement.innerHTML = ` <img src="./img/01.webp" alt="" />
+
+  // CON IF AGGIUNGO LA CLASSE ACTIVE PER FAR COMPARIRE LA PRIMA SLIDE
+  if (index == activeSlide) {
+    slideElement.classList.add("active");
+  }
+  slideElement.innerHTML = ` <img src="./${slide.image}" alt="" />
   <div class="slide-text">
-    <h1>titolo</h1>
-    <p>Lorem ipsum dolor sit amet.</p>
+    <h1>${slide.title}</h1>
+    <p>${slide.text}</p>
   </div>`;
+
+  // AGGIUNGO IL NODO ALL'ARRAY ORIGINALE DI OGGETTO
   slide.HTMLnode = slideElement;
+  // HO QUALCHE DUBBIO SUL NODO- RIVEDERE
+
+  // INSERISCO IL NODO NELL CONTENITORE PRESO DA HTML
   slidesContainerElement.append(slideElement);
 });
+
+//* Recupero tasto Next dal DOM
+const nextButton = document.getElementById("go-next");
+
+nextButton.addEventListener("click", goNext);
+
+function goNext() {
+  // rimuovere la classe active alla slide vecchia
+  const oldslide = slides[activeSlide].HTMLnode;
+  oldslide.classList.remove("active");
+
+  activeSlide++;
+
+  if (activeSlide >= slides.length) {
+    // EFFETTO PAC-MAN
+    activeSlide = 0;
+  }
+
+  // aggiungere la classe active alla slide nuova
+  const newSlide = slides[activeSlide].HTMLnode;
+  // HO QUALCHE DUBBIO SUL NODO- RIVEDERE
+  newSlide.classList.add("active");
+}
+
+//* Recupero tasto Prev dal DOM
+const prevButton = document.getElementById("go-prev");
+prevButton.addEventListener("click", goPrev);
+
+function goPrev() {
+  // rimuovere la classe active alla slide vecchia
+  const oldslide = slides[activeSlide].HTMLnode;
+  oldslide.classList.remove("active");
+
+  activeSlide--;
+
+  if (activeSlide < 0) activeSlide = slides.length - 1;
+
+  // aggiungere la classe active alla slide nuova
+  const newSlide = slides[activeSlide].HTMLnode;
+  // HO QUALCHE DUBBIO SUL NODO- RIVEDERE
+  newSlide.classList.add("active");
+}
